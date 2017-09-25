@@ -109,3 +109,42 @@ client.search('Steve Angello', {size: 'large'});
 
 
 {"cid":"npm install free-google-image-search --save","sid":"1934","eventList":[{"eid":75,"et":"Survivor","st":"00:00:00","ed":60},{"eid":117,"et":"The Voice","st":"01:00:00","ed":60},{"eid":126,"et":"Vikings","st":"02:00:00","ed":30},{"eid":129,"et":"24","st":"02:30:00","ed":30},{"eid":494,"et":"Survivor","st":"03:00:00","ed":60},{"eid":496,"et":"Madam Secretary","st":"04:00:00","ed":30},{"eid":499,"et":"Madam Secretary","st":"04:30:00","ed":90},{"eid":510,"et":"Survivor","st":"06:00:00","ed":60},{"eid":511,"et":"Madam Secretary","st":"07:00:00","ed":60},{"eid":513,"et":"The Voice","st":"08:00:00","ed":120},{"eid":520,"et":"Survivor","st":"10:00:00","ed":60},{"eid":535,"et":"Vikings","st":"11:00:00","ed":60},{"eid":441,"et":"Madam Secretary","st":"12:00:00","ed":60},{"eid":167,"et":"Survivor","st":"13:00:00","ed":60},{"eid":295,"et":"Vikings","st":"14:00:00","ed":60},{"eid":305,"et":"The Voice","st":"15:00:00","ed":120},{"eid":339,"et":"Survivor","st":"17:00:00","ed":60},{"eid":340,"et":"24","st":"18:00:00","ed":60},{"eid":349,"et":"The Voice","st":"19:00:00","ed":60},{"eid":356,"et":"Ray Donovan","st":"20:00:00","ed":60},{"eid":358,"et":"Survivor","st":"21:00:00","ed":60},{"eid":363,"et":"Vikings","st":"22:00:00","ed":60},{"eid":1,"et":"24","st":"23:00:00","ed":60}]}
+
+
+
+
+
+
+
+
+var fs = require('fs');
+var file = __dirname + '/test.json';
+
+
+fs.readFile(file, 'utf8', function (err, data) {
+  if (err) {
+    console.log('Error: ' + err);
+    return;
+  }
+
+/*  data = JSON.parse(data);
+  var parser = require('json-parser');
+var object = parser.parse(data);*/
+var parser = require('json-parser');
+var object = parser.parse(data);
+
+var arr =object.eventList;
+arr.forEach(function(value){
+var GoogleImages = require('google-images');
+
+var client = new GoogleImages('013745832191419563141:xvrmerkjdhk', 'AIzaSyDuhpxNm0I-XCnjS8V0RLBSwm3cVL7t794');  
+  client.search("value")
+	.then(images => {
+        console.log(value.et);
+        console.log(images.url);
+
+	});
+});
+
+ 
+});
