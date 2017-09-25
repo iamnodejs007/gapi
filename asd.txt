@@ -1,0 +1,111 @@
+var fs = require('fs');
+var file = __dirname + '/test.json';
+
+fs.readFile(file, 'utf8', function (err, data) {
+  if (err) {
+    console.log('Error: ' + err);
+    return;
+  }
+
+/*  data = JSON.parse(data);
+  var parser = require('json-parser');
+var object = parser.parse(data);*/
+var parser = require('json-parser');
+var object = parser.parse(data);
+console.log(object.eventList[0]);
+var arr =object.eventList;
+arr.forEach(function(value){
+  console.log(value.et);
+});
+
+ 
+});
+
+const GoogleImages = require('google-images');
+
+const client = new GoogleImages('013745832191419563141:xvrmerkjdhk', 'AIzaSyDuhpxNm0I-XCnjS8V0RLBSwm3cVL7t794');
+
+
+
+
+client.search('even')
+	.then(images => {
+        console.log(images);
+		/*
+		[{
+			"url": "http://steveangello.com/boss.jpg",
+			"type": "image/jpeg",
+			"width": 1024,
+			"height": 768,
+			"size": 102451,
+			"thumbnail": {
+				"url": "http://steveangello.com/thumbnail.jpg",
+				"width": 512,
+				"height": 512
+			}
+		}]
+		 */
+	});
+
+// paginate results
+client.search('Steve Angello', {page: 2});
+
+// search for certain size
+client.search('Steve Angello', {size: 'large'});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "name": "jsonpar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.15.5",
+    "free-google-image-search": "^1.0.0",
+    "google-images": "^2.1.0",
+    "googleapis": "^22.2.0",
+    "images-scraper": "^2.0.11",
+    "jsearch": "^1.0.0",
+    "json-parser": "^1.1.5"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"cid":"npm install free-google-image-search --save","sid":"1934","eventList":[{"eid":75,"et":"Survivor","st":"00:00:00","ed":60},{"eid":117,"et":"The Voice","st":"01:00:00","ed":60},{"eid":126,"et":"Vikings","st":"02:00:00","ed":30},{"eid":129,"et":"24","st":"02:30:00","ed":30},{"eid":494,"et":"Survivor","st":"03:00:00","ed":60},{"eid":496,"et":"Madam Secretary","st":"04:00:00","ed":30},{"eid":499,"et":"Madam Secretary","st":"04:30:00","ed":90},{"eid":510,"et":"Survivor","st":"06:00:00","ed":60},{"eid":511,"et":"Madam Secretary","st":"07:00:00","ed":60},{"eid":513,"et":"The Voice","st":"08:00:00","ed":120},{"eid":520,"et":"Survivor","st":"10:00:00","ed":60},{"eid":535,"et":"Vikings","st":"11:00:00","ed":60},{"eid":441,"et":"Madam Secretary","st":"12:00:00","ed":60},{"eid":167,"et":"Survivor","st":"13:00:00","ed":60},{"eid":295,"et":"Vikings","st":"14:00:00","ed":60},{"eid":305,"et":"The Voice","st":"15:00:00","ed":120},{"eid":339,"et":"Survivor","st":"17:00:00","ed":60},{"eid":340,"et":"24","st":"18:00:00","ed":60},{"eid":349,"et":"The Voice","st":"19:00:00","ed":60},{"eid":356,"et":"Ray Donovan","st":"20:00:00","ed":60},{"eid":358,"et":"Survivor","st":"21:00:00","ed":60},{"eid":363,"et":"Vikings","st":"22:00:00","ed":60},{"eid":1,"et":"24","st":"23:00:00","ed":60}]}
