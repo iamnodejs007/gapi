@@ -1,0 +1,72 @@
+var sequenty = require('sequenty');
+const request = require('req-then');
+var fs = require('fs');
+var file = __dirname + '/test.json';
+var Scraper = require ('images-scraper')
+  , google = new Scraper.Google();
+  var parser = require('json-parser');
+var i;
+
+
+var data = {}
+data.table = []
+
+
+//var arr =object.eventList;
+var f = [];
+var queries = ["Apple","Apricot","Avocado","Banana","Bilberry","Blackberry","Blackcurrant","Blueberry","Boysenberry","Currant","Cherry","Cherimoya","Chico fruit","Cloudberry","Coconut","Cranberry","Cucumber","Custard apple","Damson","Date","Dragonfruit","Durian","Elderberry","Feijoa","Fig","Goji berry","Gooseberry","Grape","Raisin","Grapefruit","Guava","Honeyberry","Huckleberry","Jabuticaba","Jackfruit","Jambul","Jujube","Juniper berry","Kiwano","Kiwifruit","Kumquat","Lemon","Lime","Loquat","Longan","Lychee","Mango","Mangosteen","Marionberry","Melon","Cantaloupe","Honeydew","Watermelon","Miracle fruit","Mulberry","Nectarine","Nance","Olive","Orange","Blood orange","Clementine","Mandarine","Tangerine","Papaya","Passionfruit","Peach","Pear","Persimmon","Physalis","Plantain","Plum","Prune (dried plum)","Pineapple","Plumcot (or Pluot)","Pomegranate","Pomelo","Purple mangosteen","Quince","Raspberry","Salmonberry","Rambutan","Redcurrant","Salal berry","Salak","Satsuma","Soursop","Star fruit","Solanum quitoense","Strawberry","Tamarillo","Tamarind","Ugli fruit","Yuzu"]
+
+for (i = 0; i < queries.length; i++){ 
+     f[i] = function(cb, funcIndex) 
+     // sequenty gives you cb and funcIndex  
+     {
+       
+        //var queries = [ "select .. blah blah", "update blah blah"]; 
+        // console.log( funcIndex);  
+      //console.log(funcIndex); 
+
+       var a= queries[funcIndex];
+       
+    google.list({
+	keyword: a,
+	num: 10,
+	detail: true,
+	nightmare: {
+		show: false
+	}
+})
+.then(function (res) {
+	//console.log('first 10 results from google', res);
+    for(var m=0;m<res.length;m++){
+        console.log(res[m].url);
+        var obj = {name: a,url: res[m].url}           
+                                    }
+          data.table.push(obj)                           
+
+   fs.writeFile ("final2.json", JSON.stringify(data), function(err) {
+    if (err) throw err;
+   
+    });                                 
+    
+    
+     cb();
+}).catch(function(err) {
+	console.log('err', err);
+});
+
+// you can also watch on events
+google.on('result', function (item) {
+	console.log('out', item);
+});
+  
+                 //console.log('The original request options', response.req) 
+                    ///console.log('The nodejs response instance', response.res)  
+                             // must be called 
+                         
+                        
+}}
+
+
+sequenty.run(f); // fire!nod
+
+
