@@ -1,0 +1,62 @@
+var sequenty = require('sequenty');const request = require('req-then')var f = [];var queries = [ "select .. blah blah", "update blah blah"];
+for (var i = 0; i < queries.length; i++){  f[i] = function(cb, funcIndex) // sequenty gives you cb and funcIndex  {console.log( funcIndex);    request('http://www.bbc.co.uk')  .then(response => {    console.log('Response data received', response.data)    //console.log('The original request options', response.req)    ///console.log('The nodejs response instance', response.res)          cb(); // must be called  })  .catch(console.error)  }}
+sequenty.run(f); // fire!nod
+
+
+
+
+
+
+
+
+
+var request = require('sync-request');
+for (i = 0; i < 10; i ++) {    console.log(i); var request = require('sync-request');var res = request('GET', 'http://example.com');console.log(res.getBody());}
+
+
+
+
+
+
+const request = require('req-then') var Promise = require("bluebird");var sync = require('synchronize')sync(request)   
+sync.fiber(function(){    var i;for (i = 0; i < 10; i ++) {    console.log(i);    request('http://www.bbc.co.uk')  .then(response => {    console.log('Response data received', response.data)    //console.log('The original request options', response.req)    ///console.log('The nodejs response instance', response.res)  })  .catch(console.error)}})
+
+
+
+
+
+
+
+
+var fs = require('fs');var file = __dirname + '/test.json';var parser = require('json-parser');var Scraper = require ('images-scraper')  , google = new Scraper.Google();  var i,flag;fs.readFile(file, 'utf8', function (err, data) {  if (err) {    console.log('Error: ' + err);    return;  }  var object = parser.parse(data);  var arr =object.eventList;console.log("a");for (i = 0; i < arr.length; i ++) {    flag=0;await google.list({    keyword: arr[i].et,    num: 1,    detail: true,    nightmare: {        show: true    }}).then(res => {   console.log('first 10 results from google', res[0].url);   console.log("b");   flag=1;}).catch(function(err) {    console.log('err', err);}); // you can also watch on events google.on('result', function (item) {    console.log("c");    //console.log('out', item);});
+
+};});
+
+
+
+
+
+
+
+
+var fs = require('fs');var file = __dirname + '/test.json';var parser = require('json-parser');var Scraper = require ('images-scraper')  , google = new Scraper.Google();
+fs.readFile(file, 'utf8', function (err, data) {  if (err) {    console.log('Error: ' + err);    return;  }  var object = parser.parse(data);  var arr =object.eventList;console.log("a");arr.forEach(function(value){google.list({    keyword: value.et,    num: 10,    detail: true,    nightmare: {        show: true    }}).then(function (res) {   //console.log('first 10 results from google', res);   console.log("b");}).catch(function(err) {    console.log('err', err);}); // you can also watch on events google.on('result', function (item) {    console.log("c");    //console.log('out', item);});
+
+});});
+
+
+
+
+
+
+
+
+
+var fs = require('fs');var file = __dirname + '/test.json';const GoogleImages = require('google-images');
+const client = new GoogleImages('013745832191419563141:xvrmerkjdhk', 'AIzaSyDuhpxNm0I-XCnjS8V0RLBSwm3cVL7t794');fs.readFile(file, 'utf8', function (err, data) {  if (err) {    console.log('Error: ' + err);    return;  }
+/*  data = JSON.parse(data);  var parser = require('json-parser');var object = parser.parse(data);*/var parser = require('json-parser');var object = parser.parse(data);//console.log(object.eventList[0]);var arr =object.eventList;arr.forEach(function(value){  console.log(value.et); client.search(value.et+"tv") .then(images => {        console.log(images[0].url);  /*  [{   "url": "http://steveangello.com/boss.jpg",   "type": "image/jpeg",   "width": 1024,   "height": 768,   "size": 102451,   "thumbnail": {    "url": "http://steveangello.com/thumbnail.jpg",    "width": 512,    "height": 512   }  }]   */ });
+});
+ });
+
+
+
